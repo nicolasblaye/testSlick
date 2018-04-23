@@ -39,11 +39,11 @@ releaseProcess := Seq[ReleaseStep](
 // strip the qualifier off the input version, eg. 1.2.1-SNAPSHOT -> 1.2.1
 releaseVersion := { ver => {
   val version: Option[Version] = Version(ver)
-  if (version.flatMap(_.qualifier).isDefined) { // if it's a SNAPSHOT Version, increase minor version
-    version.map(_.withoutQualifier.string).getOrElse(ver)
+  if (version.flatMap(_.qualifier).isDefined) { // previous is SNAPSHOT Version, increase minor version and add 0 for patch version
+    version.map(_.withoutQualifier).map(v => v.copy(subversions = List(v.subversions.head, 0)).string).getOrElse(ver)
   }
-  else {
-    Version(ver).map(_.bumpMinor.string).getOrElse(ver)
+  else { // previous is release, it's a patch
+    Version(ver).map(_.bumpBugfix.string).getOrElse(ver)
   }
 }}
 
