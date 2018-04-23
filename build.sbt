@@ -6,11 +6,7 @@ organization in ThisBuild := "com.powerspace.testing"
 scalaVersion := "2.12.4"
 
 publishTo := {
-  val nexus = "https://build.powerspace.com/artifactory/"
-  if (Keys.isSnapshot.value)
-    Some("snapshots" at nexus + "sbt-snapshot-local")
-  else
-    Some("releases" at nexus + "sbt-release-local")
+  Some(Resolver.file("file",  new File( "/home/nblaye/releases" )) )
 }
 
 
