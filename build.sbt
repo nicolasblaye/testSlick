@@ -1,3 +1,5 @@
+import ReleaseTransformations._
+
 name := "TestSlick"
 
 organization in ThisBuild := "com.powerspace.testing"
@@ -17,4 +19,18 @@ libraryDependencies ++= Seq(
   "ch.qos.logback" % "logback-core" % "1.2.3",
   "ch.qos.logback" % "logback-classic" % "1.2.3",
   "com.typesafe.scala-logging" %% "scala-logging" % "3.7.2"
+)
+
+releaseProcess := Seq[ReleaseStep](
+  checkSnapshotDependencies,              // : ReleaseStep
+  inquireVersions,                        // : ReleaseStep
+  runClean,                               // : ReleaseStep
+  runTest,                                // : ReleaseStep
+  setReleaseVersion,                      // : ReleaseStep
+  commitReleaseVersion,                   // : ReleaseStep, performs the initial git checks
+  tagRelease,                             // : ReleaseStep
+  publishArtifacts,                       // : ReleaseStep, checks whether `publishTo` is properly set up
+  setNextVersion,                         // : ReleaseStep
+  commitNextVersion//,                      // : ReleaseStep
+//  pushChanges                             // : ReleaseStep, also checks that an upstream branch is properly configured
 )
