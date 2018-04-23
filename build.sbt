@@ -1,6 +1,7 @@
 name := "TestSlick"
 
 version := "0.1"
+organization in ThisBuild := "com.powerspace.testing"
 
 scalaVersion := "2.12.4"
 
