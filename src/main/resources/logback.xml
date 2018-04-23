@@ -1,0 +1,15 @@
+<configuration scan="true">
+    <include resource="logback-appenders.stdout.xml"/>
+
+    <logger name="slick"  level="DEBUG" />
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%date - [%level] - %logger{36} : %m%n</pattern>
+        </encoder>
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="STDOUT"/>
+    </root>
+</configuration>
